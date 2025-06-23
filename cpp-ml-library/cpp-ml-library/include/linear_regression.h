@@ -2,19 +2,41 @@
 #define LINEAR_REGRESSION_H
 
 #include <vector>
+#include "matrix.h"
 
+/// <summary>
+/// Class for implementation of Linear Regression
+/// </summary>
 class LinearRegression
 {
 public:
-	// Constructor
+	/// <summary>
+	/// Constructor for simple linear regression.
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
 	LinearRegression(const std::vector<double>& x, const std::vector<double>& y);
 
 	/// <summary>
-	/// Get the predicted value.
+	/// Constructor for multiple linear regression.
+	/// </summary>
+	/// <param name="X"></param>
+	/// <param name="y"></param>
+	LinearRegression(const Matrix& X, const std::vector<double>& y);
+
+	/// <summary>
+	/// Get the predicted value for simple linear regression.
 	/// </summary>
 	/// <param name="x">Input value</param>
 	/// <returns>Predicted value</returns>
 	double predict(double x) const;
+
+	/// <summary>
+	/// Get the predicted value for multiple linear regression.
+	/// </summary>
+	/// <param name="X">Input values</param>
+	/// <returns>Predicted values</returns>
+	std::vector<double> predict(std::vector<double>& X) const;
 
 	/// <summary>
 	/// Get the intercept.
@@ -28,9 +50,24 @@ public:
 	/// <returns>Slope</returns>
 	double getSlope() const;
 
+	/// <summary>
+	/// Returns the coefficients for multiple linear regression.
+	/// </summary>
+	/// <returns>Coefficients</returns>
+	std::vector<double> getCoefficients() const;
+
 private:
-	double beta0;
-	double beta1;
+	// Intercept value for simple linear regression
+	double _beta0;
+
+	// Slope value for simple linear regression
+	double _beta1;
+
+	// Coefficient values for multiple linear regression
+	std::vector<double> _beta;
+
+	// Boolean value for, is simple linear regression
+	bool _isSimple;
 };
 
 #endif // !LINEAR_REGRESSION_H

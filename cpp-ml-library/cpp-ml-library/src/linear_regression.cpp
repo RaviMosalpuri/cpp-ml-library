@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 LinearRegression::LinearRegression(const std::vector<double>& x, const std::vector<double>& y)
-	:beta0(0.0), beta1(0.0)
+	:_beta0(0.0), _beta1(0.0), _isSimple(true)
 {
 	// Compare size of inputs
 	if (x.size() != y.size())
@@ -41,24 +41,40 @@ LinearRegression::LinearRegression(const std::vector<double>& x, const std::vect
 	}
 
 	// Compute beta1 and beta0 values
-	beta1 = num_sum / den_sum;
-	beta0 = y_mean - beta1 * x_mean;
+	_beta1 = num_sum / den_sum;
+	_beta0 = y_mean - _beta1 * x_mean;
+}
+
+LinearRegression::LinearRegression(const Matrix& X, const std::vector<double>& y)
+	:_beta(std::vector<double>(0.0)), _beta0(0.0), _beta1(0.0), _isSimple(false)
+{
 }
 
 double LinearRegression::predict(double x) const
 {
 	// Return the predicted value
-	return beta0 + beta1 * x;
+	return _beta0 + _beta1 * x;
+}
+
+std::vector<double> LinearRegression::predict(std::vector<double>& X) const
+{
+	return std::vector<double>();
 }
 
 double LinearRegression::getIntercept() const
 {
 	// Return the intercept
-	return beta0;
+	return _beta0;
 }
 
 double LinearRegression::getSlope() const
 {
 	// Return the slope
-	return beta1;
+	return _beta1;
+}
+
+std::vector<double> LinearRegression::getCoefficients() const
+{
+	// Return the coefficients
+	return _beta;
 }
