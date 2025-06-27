@@ -30,20 +30,26 @@ public:
 	/// </summary>
 	/// <param name="x">Input vector</param>
 	/// <returns>Resultant vector</returns>
-	std::vector<double> operator*(const std::vector<double>& x);
+	std::vector<double> operator*(const std::vector<double>& vec) const;
 
 	/// <summary>
 	/// Overloaded for Matrix-Matrix multiplication
 	/// </summary>
 	/// <param name="X">Input matrix</param>
 	/// <returns>Resultant matrix</returns>
-	Matrix operator*(const Matrix& X);
+	Matrix operator*(const Matrix& other) const;
 
 	/// <summary>
 	/// Transpose of Matrix
 	/// </summary>
 	/// <returns>Resultant matrix</returns>
 	Matrix transpose() const;
+
+	/// <summary>
+	/// Inverse of Matrix
+	/// </summary>
+	/// <returns>Resultant matrix</returns>
+	Matrix inverse() const;
 private:
 	// Number of rows
 	size_t m_numRows;
