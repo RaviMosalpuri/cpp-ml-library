@@ -14,7 +14,7 @@ std::pair<std::vector<double>, std::vector<double>> loadData(const std::string& 
     }
     std::vector<double> x, y;
     std::string line;
-    std::getline(file, line); // Skip header
+    std::getline(file, line);
     while (std::getline(file, line))
     {
         std::stringstream ss(line);

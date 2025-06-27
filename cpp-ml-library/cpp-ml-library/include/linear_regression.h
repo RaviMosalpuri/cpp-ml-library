@@ -58,16 +58,16 @@ public:
 
 private:
 	// Intercept value for simple linear regression
-	double _beta0;
+	double m_beta0;
 
 	// Slope value for simple linear regression
-	double _beta1;
+	double m_beta1;
 
 	// Coefficient values for multiple linear regression
-	std::vector<double> _beta;
+	std::vector<double> m_beta;
 
 	// Boolean value for, is simple linear regression
-	bool _isSimple;
+	bool m_isSimple;
 };
 
 #endif // !LINEAR_REGRESSION_H
