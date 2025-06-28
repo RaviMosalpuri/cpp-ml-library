@@ -35,8 +35,8 @@ public:
 	/// Get the predicted value for multiple linear regression.
 	/// </summary>
 	/// <param name="X">Input values</param>
-	/// <returns>Predicted values</returns>
-	std::vector<double> predict(std::vector<double>& X) const;
+	/// <returns>Predicted value</returns>
+	double predict(std::vector<double>& X) const;
 
 	/// <summary>
 	/// Get the intercept.

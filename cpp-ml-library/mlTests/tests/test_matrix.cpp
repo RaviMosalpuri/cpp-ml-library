@@ -2,15 +2,17 @@
 #include <gtest/gtest.h>
 
 // Test matrix constructor
-TEST(MatrixTest, Constructor) {
+TEST(MatrixTest, Constructor)
+{
     Matrix m(2, 3);  // 2 rows, 3 columns
     EXPECT_EQ(m.getNumOfRows(), 2);
     EXPECT_EQ(m.getNumOfCols(), 3);
-    EXPECT_DOUBLE_EQ(m(0, 0), 0.0);  // Assuming default initialization to 0
+    EXPECT_DOUBLE_EQ(m(0, 0), 0.0);
 }
 
 // Test element access and assignment
-TEST(MatrixTest, ElementAccess) {
+TEST(MatrixTest, ElementAccess)
+{
     Matrix m(2, 2);
     m(0, 0) = 1.0;
     m(0, 1) = 2.0;
@@ -23,7 +25,8 @@ TEST(MatrixTest, ElementAccess) {
 }
 
 // Test matrix transpose
-TEST(MatrixTest, Transpose) {
+TEST(MatrixTest, Transpose)
+{
     Matrix m(2, 3);
     m(0, 0) = 1.0; m(0, 1) = 2.0; m(0, 2) = 3.0;
     m(1, 0) = 4.0; m(1, 1) = 5.0; m(1, 2) = 6.0;
@@ -39,7 +42,8 @@ TEST(MatrixTest, Transpose) {
 }
 
 // Test matrix multiplication
-TEST(MatrixTest, MatrixMultiplication) {
+TEST(MatrixTest, MatrixMultiplication)
+{
     Matrix m1(2, 3);
     m1(0, 0) = 1.0; m1(0, 1) = 2.0; m1(0, 2) = 3.0;
     m1(1, 0) = 4.0; m1(1, 1) = 5.0; m1(1, 2) = 6.0;
@@ -57,7 +61,8 @@ TEST(MatrixTest, MatrixMultiplication) {
 }
 
 // Test matrix inverse (2x2 case)
-TEST(MatrixTest, Inverse) {
+TEST(MatrixTest, Inverse)
+{
     Matrix m(2, 2);
     m(0, 0) = 4.0; m(0, 1) = 7.0;
     m(1, 0) = 2.0; m(1, 1) = 6.0;
@@ -66,10 +71,4 @@ TEST(MatrixTest, Inverse) {
     EXPECT_NEAR(inv(0, 1), -0.7, 1e-10);
     EXPECT_NEAR(inv(1, 0), -0.2, 1e-10);
     EXPECT_NEAR(inv(1, 1), 0.4, 1e-10);
-}
-
-int main(int argc, char* argv[])
-{
-    testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();;
 }
