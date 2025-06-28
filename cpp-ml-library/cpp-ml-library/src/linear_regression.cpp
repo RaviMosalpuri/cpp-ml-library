@@ -9,7 +9,7 @@ LinearRegression::LinearRegression(const std::vector<double>& x, const std::vect
 	if (x.size() != y.size())
 	{
 		// Throw invalid argument exception
-		throw std::invalid_argument("x and y must have the same size");
+		throw std::invalid_argument("x and y must have the same size.");
 	}
 
 	// Get the size of input
@@ -37,7 +37,7 @@ LinearRegression::LinearRegression(const std::vector<double>& x, const std::vect
 	if (den_sum == 0.0)
 	{
 		// Throw runtime-error exception
-		throw std::runtime_error("Cannot compute regression: all x values are the same");
+		throw std::runtime_error("Cannot compute regression: all x values are the same.");
 	}
 
 	// Compute beta1 and beta0 values
@@ -48,6 +48,30 @@ LinearRegression::LinearRegression(const std::vector<double>& x, const std::vect
 LinearRegression::LinearRegression(const Matrix& X, const std::vector<double>& y)
 	:m_beta(std::vector<double>(0)), m_beta0(0.0), m_beta1(0.0), m_isSimple(false)
 {
+	if (X.getNumOfRows() != y.size())
+	{
+		throw std::invalid_argument("Number of observations in X and y must match.");
+	}
+	else if (X.getNumOfCols() == 0)
+	{
+		throw std::invalid_argument("X cannot be empty.");
+	}
+
+	Matrix X_with_intercept(X.getNumOfRows(), X.getNumOfCols() + 1);
+	for (size_t i = 0; i < X.getNumOfRows(); ++i)
+	{
+		X_with_intercept(i, 0) = 1.0;
+		for (size_t j = 0; j < X.getNumOfCols(); ++j)
+		{
+			X_with_intercept(i, j + 1) = X(i, j);
+		}
+	}
+
+	// Normal equations: beta = (X^T X)^(-1) X^T y
+	Matrix XTX = X_with_intercept.transpose() * X_with_intercept;
+	Matrix XTX_inv = XTX.inverse();
+	std::vector<double> XTy = X_with_intercept.transpose() * y;
+	m_beta = XTX_inv * XTy;
 }
 
 double LinearRegression::predict(double x) const

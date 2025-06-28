@@ -50,6 +50,48 @@ public:
 	/// </summary>
 	/// <returns>Resultant matrix</returns>
 	Matrix inverse() const;
+
+	/// <summary>
+	/// Get the number of rows
+	/// </summary>
+	/// <returns>Number of rows</returns>
+	inline size_t getNumOfRows() const { return m_numRows; }
+
+	/// <summary>
+	/// Get the number of columns
+	/// </summary>
+	/// <returns>Number of columns</returns>
+	inline size_t getNumOfCols() const { return m_numCols; }
+
+	/// <summary>
+	/// Overloaded for indexing for element access
+	/// </summary>
+	/// <param name="i">Row index</param>
+	/// <param name="j">Column index</param>
+	/// <returns>Value of element at index</returns>
+	double& operator() (const size_t i, const size_t j)
+	{
+		if (i >= m_numRows || i < 0 || j >= m_numCols || j < 0)
+		{
+			throw std::invalid_argument("Matrix index out of range.");
+		}
+		return m_data[i][j];
+	}
+
+	/// <summary>
+	/// Overloaded for indexing for element access (const)
+	/// </summary>
+	/// <param name="i">Row index</param>
+	/// <param name="j">Column index</param>
+	/// <returns>Const value of element at index</returns>
+	const double& operator() (const size_t i, const size_t j) const
+	{
+		if (i >= m_numRows || i < 0 || j >= m_numCols || j < 0)
+		{
+			throw std::invalid_argument("Matrix index out of range.");
+		}
+		return m_data[i][j];
+	}
 private:
 	// Number of rows
 	size_t m_numRows;

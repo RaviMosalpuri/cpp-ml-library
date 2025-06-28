@@ -36,3 +36,8 @@
 x64
 *.sln
 *.vcxproj*
+
+# Nuget Packages
+*.nupkg
+*.p7s
+packages/
