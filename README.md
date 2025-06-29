@@ -1,22 +1,36 @@
-# 📊 C++ Machine Learning Library
+# C++ Machine Learning Library
 
-A machine learning library implemented from scratch in **modern C++**, focusing on clarity, performance, and modularity. This project demonstrates a deep understanding of core machine learning algorithms and advanced C++ programming, with no third-party dependencies.
+This project is a machine learning library implemented from scratch in modern C++, with a focus on clarity, modularity, and performance. It demonstrates core machine learning algorithms and matrix operations without relying on external ML frameworks.
 
-## ✨ Current Capabilities
+## Features
 
-- **Linear Regression** — implemented from scratch using matrix algebra
+- Linear Regression (Normal Equation)
+- Multiple Linear Regression
+- Logistic Regression (Batch Gradient Descent)
+- Unit testing with Google Test (via NuGet)
+- Modular architecture for future model extensions
 
-## 🔭 Upcoming Implementations
+## Project Structure
 
--  Multiple Linear Regression
--  Logistic Regression
--  K-Means Clustering
+```
+cpp-ml-library/
+├── include/           # Header files
+├── src/               # Source files
+├── tests/             # Google Test unit tests
+└── README.md
+```
 
-## 🚀 Planned Enhancements
+## How to Build and Run Tests (Visual Studio)
+(To be updated)
 
-To further showcase advanced machine learning and C++ design skills, future work may include:
+## Planned Enhancements
 
+- K-Means Clustering
 - Polynomial Regression
+- Regularization (L1/L2)
+- Model evaluation metrics (accuracy, log-loss)
+- Batch prediction APIs
+- Additional supervised and unsupervised models
 - Decision Trees & Random Forests
 - Support Vector Machines (SVM)
 - Naive Bayes Classifier
@@ -24,30 +38,11 @@ To further showcase advanced machine learning and C++ design skills, future work
 - Gradient Descent Optimizer Module
 - Basic Feedforward Neural Network
 
-## 🧱 Project Structure
+## Goals
 
-```
-cpp-ml-library/
-├── include/       # Header files
-├── src/           # Source files
-└── README.md
-```
+- Develop a modular and testable ML framework in C++
+- Reinforce core ML concepts through low-level implementation
+- Demonstrate high-performance C++ design for numerical computing
 
-## 🎯 Project Goals
-
-- Develop a fully modular ML framework in C++
-- Reinforce core ML algorithms through low-level implementation
-- Demonstrate high-performance C++ design for computational workloads
-
-## 📚 How to Use
-
-> **Note:** Detailed build instructions and API usage examples will be added soon.
-
-## 📜 License
-
-This project is licensed under the MIT License.  
-Feel free to use, modify, and contribute!
-
----
-
-🛠 Maintained with curiosity and caffeine by [Ravi Mosalpuri](https://github.com/RaviMosalpuri)
+## License
+This project is licensed under the [MIT License](LICENSE).
