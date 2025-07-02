@@ -15,8 +15,7 @@ target_sources(ml_lib
         src/matrix.cpp
         src/linear_regression.cpp
         src/logistic_regression.cpp
-        src/kmeans.cpp
-        src/svm.cpp)
+        src/kmeans.cpp)
 target_include_directories(ml_lib
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
