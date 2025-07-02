@@ -7,6 +7,7 @@ This project is a machine learning library implemented from scratch in modern C+
 - Linear Regression (Normal Equation)
 - Multiple Linear Regression
 - Logistic Regression (Batch Gradient Descent)
+- K Means Clustering
 - Unit testing with Google Test (via NuGet)
 - Modular architecture for future model extensions
 
@@ -25,7 +26,6 @@ cpp-ml-library/
 
 ## Planned Enhancements
 
-- K-Means Clustering
 - Polynomial Regression
 - Regularization (L1/L2)
 - Model evaluation metrics (accuracy, log-loss)
