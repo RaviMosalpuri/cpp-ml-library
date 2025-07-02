@@ -41,3 +41,29 @@ x64
 *.nupkg
 *.p7s
 packages/
+
+# CMake build artifacts
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cmake
+
+# Visual Studio CMake integration
+.vs/
+out/
+
+# Ninja builds
+build.ninja
+.ninja_deps
+.ninja_log
+
+# CLion / JetBrains IDEs
+.idea/
+cmake-build-*/
+
+# Logs and caches
+*.log
+CMakeUserPresets.json
+CMakePresets.json

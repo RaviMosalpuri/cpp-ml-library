@@ -1,5 +1,6 @@
 #include "logistic_regression.h"
 #include "vector_utils.h"
+#include <cmath>
 
 LogisticRegression::LogisticRegression(double learningRate, size_t iterations)
 	:m_learningRate(learningRate), m_iterations(iterations), m_weights(std::vector<double>(0)), m_data(nullptr)
@@ -79,7 +80,7 @@ int LogisticRegression::predict(const std::vector<double>& x) const
 double LogisticRegression::sigmoid(double z) const
 {
 	// Return the sigmoid value of z
-	return 1.0/(1.0 + exp(-z));
+	return 1.0/(1.0 + std::exp(-z));
 }
 
 std::vector<double> LogisticRegression::sigmoid(std::vector<double> z) const
