@@ -2,6 +2,41 @@
 # define VECTOR_UTILS_H
 
 #include <vector>
+#include <stdexcept>
+
+/// <summary>
+/// Addition operator for subtracting two vectors
+/// </summary>
+/// <typeparam name="T"></typeparam>
+/// <param name="vec1">Vector 1</param>
+/// <param name="vec2">Vector 2</param>
+/// <returns>Resultant vector</returns>
+template <typename T>
+std::vector<T> operator+(const std::vector<T>& vec1, const std::vector<T>& vec2)
+{
+    // Check if vectors have same size
+    if (vec1.size() != vec2.size())
+    {
+        // Throw an invalid argument exception
+        throw std::invalid_argument("Vectors must be of the same size.");
+    }
+
+    // Get size of vector
+    size_t size = vec1.size();
+
+    // Intialise resultant vector
+    std::vector<T> result(size);
+
+    // Loop over elements
+    for (size_t i = 0; i < size; ++i)
+    {
+        // Get the difference of elements
+        result[i] = vec1[i] + vec2[i];
+    }
+
+    // Return result
+    return result;
+}
 
 /// <summary>
 /// Minus operator for subtracting two vectors
