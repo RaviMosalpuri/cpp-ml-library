@@ -42,6 +42,11 @@ x64
 *.p7s
 packages/
 
+# Build output
+build/
+output/
+install/
+
 # CMake build artifacts
 build/
 CMakeFiles/

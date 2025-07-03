@@ -1,0 +1,5 @@
+@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/mlTargets.cmake")
+
+set_and_check(ml_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../../include")

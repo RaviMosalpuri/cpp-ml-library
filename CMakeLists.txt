@@ -20,7 +20,8 @@ target_sources(ml_lib
 )
 target_include_directories(ml_lib
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
 )
 
 # 4. Enable testing
@@ -54,3 +55,46 @@ target_link_libraries(mlTests
 
 include(GoogleTest)
 gtest_discover_tests(mlTests)
+
+# 5. Install targets and headers
+set(PACKAGE_INCLUDE_INSTALL_DIR "include")
+
+install(TARGETS ml_lib
+    EXPORT mlTargets
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
+)
+
+install(DIRECTORY include/
+    DESTINATION ${PACKAGE_INCLUDE_INSTALL_DIR}
+)
+
+install(EXPORT mlTargets
+    FILE mlTargets.cmake
+    NAMESPACE ml::
+    DESTINATION lib/cmake/ml
+)
+
+# 6. Generate and install CMake config files
+include(CMakePackageConfigHelpers)
+
+write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/mlConfigVersion.cmake"
+    VERSION 1.0.0
+    COMPATIBILITY SameMajorVersion
+)
+
+configure_package_config_file(
+    "${PROJECT_SOURCE_DIR}/cmake/mlConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/mlConfig.cmake"
+    INSTALL_DESTINATION lib/cmake/ml
+    PATH_VARS PACKAGE_INCLUDE_INSTALL_DIR
+)
+
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/mlConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/mlConfigVersion.cmake"
+    DESTINATION lib/cmake/ml
+)
+
