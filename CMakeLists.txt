@@ -15,20 +15,15 @@ target_sources(ml_lib
         src/matrix.cpp
         src/linear_regression.cpp
         src/logistic_regression.cpp
-        src/kmeans.cpp)
+        src/kmeans.cpp
+        src/svm.cpp
+)
 target_include_directories(ml_lib
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-
-# 4. (Optional) Demo executable
-#add_executable(ml_demo
-#    cpp-ml-library/main.cpp
-#)
-#target_link_libraries(ml_demo PRIVATE ml_lib)
-
-# 5. Enable testing
+# 4. Enable testing
 include(FetchContent)
 
 FetchContent_Declare(
@@ -44,8 +39,10 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(mlTests
-  tests/test_matrix.cpp
+  tests/test_kmeans.cpp
   tests/test_linear_regression.cpp
+  tests/test_logistic_regression.cpp
+  tests/test_matrix.cpp
 )
 
 target_link_libraries(mlTests
@@ -57,20 +54,3 @@ target_link_libraries(mlTests
 
 include(GoogleTest)
 gtest_discover_tests(mlTests)
-
-
-# 6. Build test executable
-#add_executable(mlTests
-#    tests/test_matrix.cpp
-#    tests/test_linear_regression.cpp
-#)
-#target_link_libraries(mlTests
-#    PRIVATE
-#    ml_lib
-#    GTest::GTest
-#    GTest::Main
-#)
-
-# 7. Register tests
-#add_test(NAME MatrixTests    COMMAND mlTests --gtest_filter=MatrixTest.*)
-#add_test(NAME RegressionTests COMMAND mlTests --gtest_filter=LinearRegressionTest.*)
