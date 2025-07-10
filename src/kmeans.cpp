@@ -9,52 +9,43 @@ KMeans::KMeans(size_t k, size_t maxIterations, double tolerance)
 
 void KMeans::fit(const std::vector<Point>& X)
 {
-	// Clear the centroids
 	m_centroids.clear();
-	// Resize the vector
 	m_centroids.resize(m_k);
 	
 	// Randomly assign initial centroids
 	std::mt19937 gen(42);
 	std::uniform_int_distribution<size_t> dist(0, X.size() - 1);
 
-	// Loop over the centroids
 	for (auto& centroid : m_centroids)
 	{
 		// Assign centroids a random point from input
 		centroid = X[dist(gen)];
 	}
 
-	// Loop over the iterations
 	for (size_t it = 0; it < m_maxIterations; ++it)
 	{
 		// Initialise clusters
 		std::vector<std::vector<Point>> clusters(m_k);
 
-		// Loop over the points
+		// 1. Assign points to nearest clusters
 		for (const auto& point : X)
 		{
 			size_t closestCentroid = getClosestCentroid(point);
 			clusters[closestCentroid].emplace_back(point);
 		}
 
-		// Initialise new centroids
+		// 2. Get new centroids as mean of points in clusters
 		std::vector<Point> newCentroids(m_k);
-
-		// Loop over the clusters
 		for (size_t i = 0; i < m_k; ++i)
 		{
-			// Get cluster size
 			size_t clusterSize = clusters[i].size();
 			
-			// Check if size not zero
 			if (clusterSize != 0)
 			{
-				// Initialise sum
 				Point sum(X[0].size(), 0.0);
-				// Get sum of all points in cluster
+
 				for (const auto& val : clusters[i]) { sum = sum + val; }
-				// Get the new centroid as mean of values
+
 				newCentroids[i] = sum / clusterSize;
 			}
 			else
@@ -64,22 +55,20 @@ void KMeans::fit(const std::vector<Point>& X)
 			}
 		}
 
+		// 3. Calculate change in centroid values
+
 		// Store the maximum change in centroid values
 		double maxChange = 0.0;
-		// Loop over the centroids
 		for (size_t i = 0; i < m_k; ++i)
 		{
 			// Get the maximum change in centroid values
 			maxChange = std::max(maxChange, getEuclideanDistance(m_centroids[i], newCentroids[i]));
 		}
 
-		// Assign the new centroid values
 		m_centroids = std::move(newCentroids);
 
-		// Check if maximum change is less than tolerance value
 		if (maxChange < m_tolerance)
 		{
-			// Break loop
 			break;
 		}
 	} // for loop
@@ -99,27 +88,20 @@ double KMeans::getEuclideanDistance(const Point& a, const Point& b) const
 
 size_t KMeans::getClosestCentroid(const Point& p) const
 {
-	// Initialise the result
 	size_t result = 0;
 
 	// Initialise the minimum distance to maximum limit
 	double minDist = std::numeric_limits<double>::max();
 
-	// Loop over the centroids
 	for (size_t i = 0; i < m_k; ++i)
 	{
-		// Get the distance from current centroid
 		double currDist = getEuclideanDistance(p, m_centroids[i]);
-		// Check if current distance is less than minimum distance
 		if (currDist < minDist)
 		{
-			// Update the minimum distance
 			minDist = currDist;
-			// Update the centroid
 			result = i;
 		}
 	}
 
-	// Return the result
 	return result;
 }
